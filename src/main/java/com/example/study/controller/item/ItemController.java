@@ -1,27 +1,37 @@
 package com.example.study.controller.item;
 
 import com.example.study.entity.Item;
+import com.example.study.model.AddItemInput;
 import com.example.study.repository.ItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.study.service.ItemService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 public class ItemController {
-    @Autowired
+
+    private ItemService itemService;
     private ItemRepository itemRepository;
+
+    public ItemController(ItemService itemService, ItemRepository itemRepository) {
+        this.itemService = itemService;
+        this.itemRepository = itemRepository;
+    }
 
     @GetMapping("/items")
     public List<Item> getItems() {
-        return itemRepository.findAll();
+        List<Item> items = itemRepository.findAll();
+        return items;
     }
 
     @PostMapping("/items")
-    public Item addItem(@RequestBody Item item) {
-        return itemRepository.save(item);
+    public long addItem(@RequestBody @Valid AddItemInput input) {
+        long id = itemService.addItem(input);
+        return id;
     }
 }
