@@ -1,8 +1,8 @@
 package com.example.study.controller.item;
 
+import com.example.study.dto.item.UpdateItemRequest;
 import com.example.study.entity.Item;
 import com.example.study.model.AddItemInput;
-import com.example.study.model.UpdateItemInput;
 import com.example.study.repository.ItemRepository;
 import com.example.study.service.ItemService;
 import jakarta.validation.Valid;
@@ -36,8 +36,8 @@ public class ItemController {
     @PutMapping("/items/{id}")
     public void updateItem(
             @PathVariable long id,
-            @RequestBody UpdateItemInput input
+            @RequestBody UpdateItemRequest request
     ) {
-        itemService.updateItem(id, input);
+        itemService.updateItem(id, request);
     }
 }

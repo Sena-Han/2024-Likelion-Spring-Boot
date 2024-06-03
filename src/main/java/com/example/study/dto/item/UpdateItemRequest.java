@@ -1,4 +1,4 @@
-package com.example.study.model;
+package com.example.study.dto.item;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.Range;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateItemInput {
+public class UpdateItemRequest {
     @NotBlank(message = "상품 설명은 비워둘 수 없습니다.")
     private String itemDescription;
 
